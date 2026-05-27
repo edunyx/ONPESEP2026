@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Simulador de capacitación para Miembros de Mesa — Segunda Elección General 2026 — ONPE Perú">
+  <title>Simulador Mesa Electoral 2026 · ONPE Perú</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+  <!-- ===================== LAYOUT PRINCIPAL ===================== -->
+  <div class="app-shell">
+
+    <!-- --------- SIDEBAR --------- -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Módulos del simulador">
+
+      <div class="sidebar-brand">
+        <div class="brand-emblem">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="36" height="36" rx="10" fill="#A31621"/>
+            <rect x="11" y="17" width="14" height="2.5" rx="1.25" fill="white"/>
+            <rect x="11" y="11" width="14" height="2.5" rx="1.25" fill="white"/>
+            <path d="M11 23.5h8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-copy">
+          <span class="brand-name">Mesa Electoral</span>
+          <span class="brand-subtitle">Segunda Elección 2026</span>
+        </div>
+        <button class="sidebar-close" id="sidebarClose" aria-label="Cerrar menú">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <div class="sidebar-scroll">
+        <p class="sidebar-section-label">MÓDULOS DE CAPACITACIÓN</p>
+        <nav id="sidebarNav" aria-label="Lista de módulos"></nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="progress-widget">
+          <div class="pw-row">
+            <span class="pw-label">Progreso general</span>
+            <span class="pw-pct" id="sidebarPct">0%</span>
+          </div>
+          <div class="pw-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="pwTrack">
+            <div class="pw-fill" id="pwFill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Overlay sidebar móvil — pointer-events sólo cuando está abierto -->
+    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+    <!-- --------- ÁREA PRINCIPAL --------- -->
+    <div class="main-area">
+
+      <!-- Top bar -->
+      <header class="topbar" role="banner">
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="topbar-breadcrumb" id="topbarBreadcrumb" aria-live="polite">
+          <span class="tb-root">Inicio</span>
+        </div>
+        <button class="btn-restart" id="btnRestart" title="Reiniciar simulador" aria-label="Reiniciar simulador desde el inicio">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M2 9a7 7 0 107-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M2 4.5V9H6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="btn-restart-label">Reiniciar</span>
+        </button>
+      </header>
+
+      <!-- Barra de progreso de pasos -->
+      <div class="step-progress-wrap" id="stepProgressWrap" style="display:none" aria-hidden="true">
+        <div class="sp-track"><div class="sp-fill" id="spFill"></div></div>
+        <span class="sp-label" id="spLabel"></span>
+      </div>
+
+      <!-- Contenido dinámico -->
+      <main class="main-content" id="mainContent" role="main" aria-live="polite">
+        <!-- Renderizado por JavaScript -->
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer" role="contentinfo">
+        <div class="footer-inner">
+          <div class="footer-flag" aria-hidden="true">
+            <span class="ff-red"></span>
+            <span class="ff-white"></span>
+            <span class="ff-red"></span>
+          </div>
+          <p class="footer-text">
+            <span class="ft-primary">Segunda Elección General 2026 — Perú</span>
+            <span class="ft-dot" aria-hidden="true">·</span>
+            <span class="ft-credit">Desarrollado por <strong>Eduardo Ch.</strong> · Coordinador de Mesa</span>
+          </p>
+        </div>
+      </footer>
+    </div><!-- /main-area -->
+  </div><!-- /app-shell -->
+
+
+  <!-- ===================== MODAL: EJEMPLO SVG ===================== -->
+  <div class="modal-backdrop" id="exampleBackdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="exampleModalTitle">
+    <div class="modal-box" id="exampleBox">
+      <div class="modal-header">
+        <div class="modal-header-icon" aria-hidden="true">🔎</div>
+        <h3 class="modal-title" id="exampleModalTitle">Ejemplo Visual</h3>
+        <button class="modal-close-btn" id="exampleClose" aria-label="Cerrar ejemplo">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="exampleBody"></div>
+      <div class="modal-footer">
+        <p class="modal-caption" id="exampleCaption"></p>
+        <button class="btn-primary" id="exampleClosePrimary">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL: ALERTA ===================== -->
+  <div class="modal-backdrop alert-backdrop" id="alertBackdrop" aria-hidden="true" role="alertdialog" aria-modal="true" aria-labelledby="alertTitle">
+    <div class="modal-box alert-box" id="alertBox">
+      <div class="alert-box-icon" id="alertIcon" aria-hidden="true"></div>
+      <h3 class="alert-box-title" id="alertTitle"></h3>
+      <p class="alert-box-message" id="alertMessage"></p>
+      <button class="btn-primary btn-alert-confirm" id="alertConfirm">Entendido</button>
+    </div>
+  </div>
+
+  <!-- ===================== VISOR MULTIMEDIA (IMAGEN / VIDEO) =====================
+       z-index: 800. pointer-events: none cuando está cerrado (sin .open).
+       Cuando .open: toma foco y bloquea scroll del body correctamente.
+  ============================================================================= -->
+  <div class="iv-backdrop" id="ivBackdrop"
+       aria-hidden="true" role="dialog" aria-modal="true"
+       aria-labelledby="ivTitle">
+
+    <!-- ── TOPBAR ── -->
+    <div class="iv-topbar">
+      <div class="iv-topbar-left">
+        <span class="iv-topbar-icon" id="ivTopbarIcon" aria-hidden="true">🖼️</span>
+        <div class="iv-topbar-meta">
+          <span class="iv-topbar-title" id="ivTitle">Referencia</span>
+          <span class="iv-topbar-sub" id="ivSubtitle"></span>
+        </div>
+      </div>
+
+      <!-- Controles: zoom sólo visibles para imágenes -->
+      <div class="iv-controls" role="toolbar" aria-label="Controles del visor">
+        <div class="iv-zoom-group" id="ivZoomGroup" aria-label="Zoom">
+          <button class="iv-ctrl-btn" id="ivZoomOut" title="Reducir (−)" aria-label="Reducir imagen">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.7"/>
+              <line x1="5.5" y1="8" x2="10.5" y2="8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              <line x1="13" y1="13" x2="16" y2="16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <span class="iv-zoom-pct" id="ivZoomPct" aria-live="polite">100%</span>
+          <button class="iv-ctrl-btn" id="ivZoomIn" title="Ampliar (+)" aria-label="Ampliar imagen">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.7"/>
+              <line x1="8" y1="5.5" x2="8" y2="10.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              <line x1="5.5" y1="8" x2="10.5" y2="8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              <line x1="13" y1="13" x2="16" y2="16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="iv-ctrl-btn iv-btn-reset" id="ivReset" title="Vista original" aria-label="Restablecer vista">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M2.5 9a6.5 6.5 0 106.5-6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              <path d="M2.5 4.5V9H7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="iv-divider" aria-hidden="true"></div>
+        <button class="iv-ctrl-btn iv-btn-close" id="ivClose" title="Cerrar (Esc)" aria-label="Cerrar visor">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M14 4L4 14M4 4l10 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── ESCENARIO: imagen o video ── -->
+    <div class="iv-stage" id="ivStage">
+      <div class="iv-canvas" id="ivCanvas">
+
+        <!-- IMAGEN -->
+        <img id="ivImg" src="" alt="" draggable="false" style="display:none"/>
+
+        <!-- VIDEO (loop, muted, autoplay) -->
+        <video id="ivVideo"
+               playsinline muted loop autoplay
+               preload="metadata"
+               style="display:none"
+               aria-label="Video de demostración en bucle">
+          <!-- Las fuentes se agregan dinámicamente vía JS -->
+        </video>
+
+        <!-- BARRA PROGRESO VIDEO -->
+        <div class="iv-video-progress" id="ivVideoProgress" style="display:none" aria-hidden="true">
+          <div class="iv-video-progress-fill" id="ivVideoProgressFill"></div>
+        </div>
+
+        <!-- SPINNER de carga -->
+        <div class="iv-loading" id="ivLoading">
+          <div class="iv-spinner" aria-hidden="true"></div>
+          <span>Cargando…</span>
+        </div>
+
+        <!-- ERROR -->
+        <div class="iv-error" id="ivError" style="display:none" role="alert">
+          <span class="iv-err-icon" aria-hidden="true">📂</span>
+          <p class="iv-err-title">Archivo no encontrado</p>
+          <p class="iv-err-msg" id="ivErrMsg">Verifica la ruta en app.js</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BARRA INFERIOR (hints) — oculta en móvil vía CSS ── -->
+    <div class="iv-bottombar" id="ivBottombar" aria-hidden="true">
+      <span class="iv-hint iv-hint-img" id="ivHintImg">
+        🖱️ Rueda para zoom &nbsp;·&nbsp; ✋ Arrastra para mover &nbsp;·&nbsp; 🖱️ Doble clic = zoom max &nbsp;·&nbsp; <kbd>Esc</kbd> cerrar
+      </span>
+      <span class="iv-hint iv-hint-vid" id="ivHintVid" style="display:none">
+        🎬 Video en bucle automático &nbsp;·&nbsp; <kbd>Esc</kbd> cerrar
+      </span>
+    </div>
+
+  </div><!-- /iv-backdrop -->
+
+
+  <!-- ===================== TOAST ===================== -->
+  <div class="toast" id="toast" role="status" aria-live="assertive" aria-atomic="true"></div>
+
+  <!-- ===================== BOTÓN SCROLL AL INICIO ===================== -->
+  <button class="btn-scroll-top" id="btnScrollTop" aria-label="Volver al inicio" title="Volver arriba">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>
