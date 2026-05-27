@@ -87,13 +87,17 @@ const SECCIONES = [
         tituloEjemplo: 'Cédula de Votación — Vista Frontal y Reverso',
         captionEjemplo: 'El Presidente firma en el reverso de la cédula. La firma debe ser legible. El personero puede agregar su rúbrica opcionalmente.',
         alertaAlEntrar: false,
-          mediaReal: {
-          tipo:      'imagen',
-          src:       'images/cedula_anv_rever.jpg',
-          alt:       'Fotografía de la Cédula de Votación',
-          titulo:    'Cédula de Votación — Documento Real',
-          subtitulo: 'Módulo 1 · Paso 3 de 5 — Vista Frontal y Reverso',
-        },
+      mediaReal: {
+tipo: 'video',
+src: 'images/CEDULAS_FIRMADAS.mp4',
+alt: 'Fotografía de la Cédula de Votación',
+titulo: 'Cédula de Votación — Documento Real',
+subtitulo: 'Módulo 1 · Paso 3 de 5 — Vista Frontal y Reverso',
+poster: 'images/acta-instalacion.jpg',
+fuentes: [
+{ src: 'images/CEDULAS_FIRMADAS.mp4', mime: 'video/mp4' },
+],
+},
       },
       {
         titulo: 'Control de Asistencia de Miembros',
@@ -112,12 +116,16 @@ const SECCIONES = [
         captionEjemplo: 'Modelo de la hoja de asistencia. Todos los presentes deben firmar. Los ausentes se registran como "FALTÓ".',
         alertaAlEntrar: false,
         mediaReal: {
-          tipo:      'imagen',
-          src:       'images/hoja-asistencia.jpg',
-          alt:       'Fotografía de la Hoja de Control de Asistencia de Miembros de Mesa',
-          titulo:    'Hoja de Control de Asistencia — Documento Real',
+          tipo: 'video',
+          src: 'images/asistencia_llenado.mp4',
+          alt: 'Fotografía de la Hoja de Control de Asistencia de Miembros de Mesa',
+          titulo: 'Hoja de Control de Asistencia — Documento Real',
           subtitulo: 'Módulo 1 · Paso 4 de 5 — Control de Asistencia de Miembros',
-        },
+          poster: 'images/acta-instalacion.jpg',
+          fuentes: [
+          { src: 'images/asistencia_llenado.mp4', mime: 'video/mp4' },
+          ],
+          },
       },
       {
         titulo: 'Acta de Instalación — Sección A',
@@ -141,23 +149,7 @@ const SECCIONES = [
         tituloEjemplo: 'Modelo — Acta de Instalación (Sección A)',
         captionEjemplo: 'Ejemplo de la Sección A correctamente completada. Observa los campos obligatorios y el formato de escritura de números.',
         alertaAlEntrar: false,
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-           MEDIA REAL — imagen o video para este paso.
-           ┌─ TIPO IMAGEN ──────────────────────────────────────────────────┐
-           │  tipo: 'imagen'                                                │
-           │  src:  'SEP-2026-INDEX/images/mi-foto.jpg'                    │
-           │  alt:  'Descripción accesible'                                 │
-           └────────────────────────────────────────────────────────────────┘
-           ┌─ TIPO VIDEO (bucle automático, sin sonido) ────────────────────┐
-           │  tipo: 'video'                                                 │
-           │  src:  'SEP-2026-INDEX/images/demo.mp4'  ← fuente principal   │
-           │  fuentes: [  ← fuentes alternativas (mejor compatibilidad)    │
-           │    { src: '...demo.mp4',  mime: 'video/mp4'  },               │
-           │    { src: '...demo.webm', mime: 'video/webm' },               │
-           │  ]                                                             │
-           │  poster: 'SEP-2026-INDEX/images/demo-poster.jpg'  // opcional │
-           └────────────────────────────────────────────────────────────────┘
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+       
         mediaReal: {
           tipo:      'video',
           src:       'images/10_instala.mp4',
@@ -270,7 +262,7 @@ const SECCIONES = [
         subtitulo: 'Cerrar el proceso y preparar el escrutinio',
         descripcion: 'A las 5:00 p.m. se cierra la votación. Solo los electores que ya están en la fila antes de ese momento tienen derecho a votar.',
         checklist: [
-          { id: 'c2_18', texto: 'Verificar la hora las 5:00 p.m.', requerido: true },
+          { id: 'c2_18', texto: 'Verificar la hora 5:00 p.m para anunciar cierre de votación.', requerido: true },
          /* { id: 'c2_19', texto: 'Anunciar el cierre de la votación en voz alta', requerido: true },*/
           { id: 'c2_20', texto: 'Permitir votar a quienes ya estaban en la fila al cierre', requerido: true },
           { id: 'c2_21', texto: 'Marcar "NO VOTÓ" en la lista de electores', requerido: true },
@@ -373,16 +365,20 @@ const SECCIONES = [
         validacion: 'Voto VÁLIDO: la marca (+ o X) tiene su intersección dentro del recuadro del candidato. Si la marca sale, es NULO. Las cédulas sin marca son votos BLANCOS.',
         noHacer: 'NO escribir resultados directamente en el Acta durante este paso. La Hoja Borrador es el documento de trabajo. El Acta se llena una vez que los totales son definitivos.',
         alerta: null,
-        tieneEjemplo: true, tipoEjemplo: 'hoja_borrador',
+        tieneEjemplo: false, tipoEjemplo: 'hoja_borrador',
         tituloEjemplo: 'Hoja Borrador — Método de Palotes',
         captionEjemplo: 'Registro con palotes: cada 4 líneas verticales se cruzan con una diagonal al llegar al 5. Facilita el conteo rápido y la verificación.',
         alertaAlEntrar: false,
-        mediaReal: {
-          tipo:      'imagen',
-          src:       'images/hoja-borrador.jpg',
-          alt:       'Fotografía de la Hoja Borrador con el método de palotes',
-          titulo:    'Hoja Borrador — Documento Real',
-          subtitulo: 'Módulo 3 · Paso 4 de 5 — Registro de Votos',
+       mediaReal: {
+          tipo:      'video',
+          src:       'images/HB_llenado.mp4',
+          alt:       'Video del proceso de escrutinio y conteo de votos en palotes usando la Hoja Borrador',
+          titulo:    'Escrutinio — Conteo en la Hoja Borrador',
+          subtitulo: 'Módulo 3 · Paso 4 de 5 — Hoja Borrador y registro de votos',
+          poster:    'images/hoja-borrador.jpg',
+          fuentes: [
+            { src: 'images/HB_llenado.mp4', mime: 'video/mp4' },
+          ],
         },
       },
       {
@@ -438,13 +434,13 @@ const SECCIONES = [
         alertaAlEntrar: false,
         mediaReal: {
           tipo:      'video',
-          src:       'images/10_escrutinio.mp4',
+          src:       'images/A_B_C_LLE.mp4',
           alt:       'Video del proceso de escrutinio y conteo de votos',
-          titulo:    'Escrutinio — Conteo final de votos',
+          titulo:    'Escrutinio — Llenado de Actas (documento real)',
           subtitulo: 'Módulo 4 · Paso 1 de 4 — Escrutinio',
           poster:    'images/hoja-borrador.jpg',
           fuentes: [
-            { src: 'images/10_escrutinio.mp4', mime: 'video/mp4' },
+            { src: 'images/A_B_C_LLE.mp4', mime: 'video/mp4' },
           ],
         },
       },
@@ -534,10 +530,17 @@ const SECCIONES = [
         validacion: 'El sobre plomo es el que se procesa para el cómputo oficial. Verificar que el acta dentro sea completamente legible antes de sellarlo.',
         noHacer: 'NO confundir los colores de los sobres. Revisa el rótulo impreso en cada uno antes de introducir el acta.',
         alerta: null,
-        tieneEjemplo: true, tipoEjemplo: 'sobres_colores',
+        tieneEjemplo: false, tipoEjemplo: 'sobres_colores',
         tituloEjemplo: 'Sobres de Colores — Distribución Oficial',
         captionEjemplo: 'Los 4 sobres con sus destinos. Cada uno tiene el nombre del destinatario impreso. Siempre verificar antes de sellar.',
         alertaAlEntrar: false,
+          mediaReal: {
+           tipo:      'imagen',
+           src:       'images/sobres_4.jpg',
+           titulo:    'Sobre de Colores para Actas Electorales',
+           subtitulo: 'Sobre verde, rojo, celeste y plomo para cada una de las 4 copias del Acta Electoral',
+           alt:       'Sobre de Colores para cada Acta Electoral',
+        },
       },
       {
         titulo: 'Lista de Electores y Cédulas',
@@ -1349,7 +1352,7 @@ function renderizarBienvenida() {
 
   const html = `
     <div class="welcome-hero">
-      <div class="welcome-badge">🗳️ SIMULADOR OFICIAL · ONPE PERÚ</div>
+      <div class="welcome-badge">🗳️ SIMULADOR ELECTORAL 2026 · PERÚ</div>
       <h1 class="welcome-title">Capacitación para<br><span>Miembros de Mesa</span></h1>
       <p class="welcome-subtitle">Aprende paso a paso el procedimiento completo de un Miembro de Mesa para la Segunda Elección General 2026.</p>
       <div class="welcome-stats">
@@ -2484,41 +2487,6 @@ function inicializarVisor() {
   });
 
 }
-
-
-/* ================================================================
-   GUÍA RÁPIDA — CÓMO AGREGAR IMAGEN O VIDEO A CUALQUIER PASO
-   ================================================================
-   1. Abre app.js y localiza el paso deseado dentro de SECCIONES[].
-   2. Agrega la propiedad "mediaReal" al objeto del paso:
-
-   ── IMAGEN ───────────────────────────────────────────────────────
-   mediaReal: {
-     tipo:      'imagen',
-     src:       'SEP-2026-INDEX/images/mi-foto.jpg',
-     titulo:    'Título en el visor',
-     subtitulo: 'Contexto (opcional)',
-     alt:       'Descripción accesible',
-   },
-
-   ── VIDEO (bucle automático, sin sonido) ─────────────────────────
-   mediaReal: {
-     tipo:      'video',
-     src:       'SEP-2026-INDEX/images/demo.mp4',   // fuente principal
-     titulo:    'Título en el visor',
-     subtitulo: 'Descripción del video (opcional)',
-     poster:    'SEP-2026-INDEX/images/demo-poster.jpg', // opcional
-     fuentes: [                   // recomendado para mejor compatibilidad
-       { src: 'SEP-2026-INDEX/images/demo.mp4',  mime: 'video/mp4'  },
-       { src: 'SEP-2026-INDEX/images/demo.webm', mime: 'video/webm' },
-     ],
-   },
-
-   FORMATOS ADMITIDOS
-     Imagen: .jpg  .jpeg  .png  .webp  .gif  .svg
-     Video:  .mp4  .webm  .ogg  .mov
-   ================================================================ */
-
 
 // Arrancar cuando el DOM esté listo
 if (document.readyState === 'loading') {
